@@ -1,0 +1,60 @@
+body {
+font-family: 'Josefin Slab', serif;
+}
+
+h1 {
+    text-align: center;
+    padding-top: 15%
+}
+
+h2 {
+    /*font-family: 'Squada One', cursive;*/
+    font-size: 25px;
+    margin: 0;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    text-decoration: underline;
+}
+
+#menu {
+    position: fixed;
+    background-color: white;
+    width: 100%;
+    top:0;
+}
+
+#page1 {
+    height: 1000px;
+}
+
+#page2 {
+    height: 1000px;
+}
+
+#page3 {
+    height: 1000px;
+}
+
+#page4 {
+    height: 1000px;
+}
