@@ -1,0 +1,63 @@
+<html>
+<head>
+	<link rel="stylesheet" href="css/portfolio.css">
+	<link href="https://fonts.googleapis.com/css?family=Josefin+Slab|Squada+One" rel="stylesheet">
+	<title> My Portfolio </title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+	<script src="https://github.com/kswedberg/jquery-smooth-scroll/blob/master/jquery.smooth-scroll.min.js"></script>
+	<script>
+	$('.smooth').on('click', function() {
+	    $.smoothScroll({
+	        scrollElement: $('body'),
+	        scrollTarget: '#' + this.id
+	    });
+	    
+	    return false;
+	});
+</script>
+</head>
+
+<body> 
+	<ul id = menu>
+	  <li><a class="active" href="#home">Home</a></li>
+	  <li><a href="#experience">Experience</a></li>
+	  <li><a href="#projects">Projects</a></li>
+	  <li><a href="#contact">Contact</a></li>
+	</ul>
+
+	<h1> Emily Morrow</h1>
+
+	<div id="page1">
+		<a id="about" class="smooth"></a>
+		<h2>About</h2>
+		<p>Hey, I'm Emily! I am a Junior at Brigham Young University pursuing a Bachelor's degree in Computer Science.</p>
+	</div>
+	<div id="page2">
+		<a id="experience" class="smooth"></a>
+		<h2>Work Experience</h2>
+		<ul>
+			<li>Web Developer - BYU Research Development</li>
+			<li>Web Developer - BYU Marriott School of Management</li>
+		</ul>
+	</div>
+	<div id="page3">
+		<a id="projects" class="smooth"></a>
+		<h2>Projects</h2>
+		<ul>
+			<li><a href="https://emily-morrow.com" target="_blank">Portfolio Website</a></li>
+			<li><a href="https://stpost.github.io/" target="_blank">Rug Pricing Tool Site</a></li>
+			<li>Family Map App</li>
+		</ul>
+	</div>
+	<div id="page4">
+		<a id="contact" class="smooth"></a>
+		<h2>Contact Info</h2>
+		<ul>
+			<li><a href="mailto:emilycmorr@gmail.com">Email</a></li>
+			<li><a href="https://github.com/EmMorrow" target="_blank">GitHub</a></li>
+			<li><a href="https://www.linkedin.com/in/emily-morrow-015947126/" target="_blank"> LinkedIn</a></li>
+		</ul>
+	</div>
+
+</body>
+</html>
