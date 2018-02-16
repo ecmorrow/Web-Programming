@@ -2,7 +2,7 @@ $(document).ready(function() {
 	var i = 1;
 	var dogs;
 	
-	var myurl= "https://api.rescuegroups.org/rest/?key=8oqHMgcE&type=animals&limit=30";
+	var myurl= "https://api.rescuegroups.org/rest/?key=8oqHMgcE&type=animals&limit=20";
 	$.ajax({
 		type:"GET",
 	    url : myurl,
@@ -37,7 +37,7 @@ $(document).ready(function() {
 
 	function nextItem() {
 		i = i + 1;
-		if (i > 29) i = 1;
+		if (i > 19) i = 1;
 		showDog(dogs[i]);
 	}
 
