@@ -33,7 +33,7 @@
       </div>
       <div class="footer">
         <i class="fa fa-github fa-lg inline" aria-hidden="true"></i>
-        <a class="light" href="https://github.com/EmMorrow/cs260/tree/master/cp3" target="_blank">GitHub</a>
+        <a class="light" href="https://github.com/EmMorrow/cs260/tree/master/ncp4" target="_blank">GitHub</a>
       </div>
     </div>
     </div>
