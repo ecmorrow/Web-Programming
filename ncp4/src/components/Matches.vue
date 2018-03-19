@@ -1,6 +1,6 @@
 
 <template>
-<div id="app">
+<!-- <div id="app"> -->
     <div class="header">
       <ul>
         <li><router-link to="/matches" id="active">Matches</router-link></li>
@@ -13,30 +13,39 @@
         <li><button class="btn" v-bind:class="{ act: isMediumActive }" v-on:click="filterMedium">show medium dogs</button></li>
         <li><button class="btn" v-bind:class="{ act: isSmallActive }" v-on:click="filterSmall">show small dogs</button></li>
       </ul>
+      
+
       <ul>
         <li class="match" v-for="match in matches">
-          <img v-bind:src="match.img"/>
-          <label>{{ match.name }}</label>
-          <i class="right fa fa-close" aria-hidden="true"></i>
+          <img v-bind:src="match.img" class="click" v-on:click="showInfo(match)"/>
+          <label class="click" v-on:click="showInfo(match)">{{ match.name }}</label>
+          <i v-on:click="deleteItem(match)" class="right fa fa-close" aria-hidden="true"></i>
           
         </li>
       </ul>
+      <div v-if="seen">
+        <div id="light" class="white_content">
+          <a class="rright" v-on:click="unsee">Close</a>
+          <h1>Dog Info</h1>
+          <p>Name: {{ currMatch.name }}</p>
+          <p>Age: {{ currMatch.age }}</p>
+          <p>Gender: {{ currMatch.sex }}</p>
+          <p>Size: {{ currMatch.size }}</p>
+        </div>
+        <div  id="fade" class="black_overlay"></div>
+      </div>
     </div>
 
 
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import axios from 'axios';
-import modal from './modal.vue';
 
 
 export default {
   name: 'Swipe',
-  components: {
-    modal,
-  },
   data () {
     return {
       matches:[],
@@ -45,6 +54,8 @@ export default {
       isMediumActive: true,
       isBoyActive: true,
       isGirlActive: true,
+      seen: false,
+      currMatch: {},
     }
   },
   created: function() {
@@ -53,6 +64,14 @@ export default {
   watch: {
   },
   methods: {
+    unsee: function() {
+      this.seen = false;
+    },
+    showInfo: function(match) {
+      console.info(this.seen);
+      this.currMatch = match;
+      this.seen = true;
+    },
     getMatches: function() {
         axios.get("/api/matches").then(response => {
          this.matches = response.data;
@@ -62,7 +81,7 @@ export default {
        });
     },
     deleteItem: function(item) {
-       axios.delete("/api/matches/" + match.id).then(response => {
+       axios.delete("/api/matches/" + item.id).then(response => {
          this.getMatches();
          return true;
        }).catch(err => {
@@ -125,110 +144,51 @@ export default {
             return (item.sex == "Male" && item.size =="Small");
           })
       }
+      else if (!this.isBoyActive && !this.isGirlActive && !this.isSmallActive && !this.isMediumActive) {
+        // only show small and boy
+        this.matches = this.ogMatches.filter(function(item) {
+            return (item.sex == "M");
+          })
+      }
 
      },
      filterGirls: function() {
         if (this.isGirlActive) {
           this.isGirlActive = false;
-          // stop showing girl
-          this.filterItems();
-          // this.matches = this.matches.filter(function(item) {
-          //   return item.sex != "Female";
-          // })
         }
         else {
           this.isGirlActive = true;
-          // show girl again
-          this.filterItems();
-        //   for (var i = 0; i < this.ogMatches.length; i++) {
-        //     var curr = this.ogMatches[i]; 
-        //     if (!this.isSmallActive) {
-        //       if (curr.sex === "Female" && curr.size != "Small") this.matches.push(curr);
-        //     }
-        //     else if (!this.isBigActive) {
-        //       if (curr.sex === "Female" && curr.size != "Big") this.matches.push(curr);
-        //     }
-        //     else if (curr.sex === "Female") this.matches.push(curr);
-        //   }
         }
+         this.filterItems();
      },
      filterSmall: function() {
         if (this.isSmallActive) {
           this.isSmallActive = false;
-          // stop showing small
-          this.filterItems();
-          // this.matches = this.matches.filter(function(item) {
-          //   return item.size != "Small";
-          // })
         }
         else {
           this.isSmallActive = true;
-          // show small again
-          this.filterItems();
-          // for (var i = 0; i < this.ogMatches.length; i++) {
-          //   var curr = this.ogMatches[i];
-          //   console.info(curr.size);
-          //   if (!this.isBoyActive) {
-          //     if (curr.size === "Small" && curr.sex != "Male") this.matches.push(curr);
-          //   }
-          //   else if (!this.isGirlActive) {
-          //     if (curr.size=== "Small" && curr.sex != "Female") this.matches.push(curr);
-          //   }
-          //   else if (curr.size === "Small") this.matches.push(curr);
-          // }
         }
+        this.filterItems();
      },
      filterMedium: function() {
         if (this.isMediumActive) {
           this.isMediumActive = false;
-          // stop showing big
-          this.filterItems();
-          // this.matches = this.matches.filter(function(item) {
-          //   return item.size != "Medium";
-          // })
         }
         else {
           this.isMediumActive = true;
-          // show big again
-          this.filterItems();
-          // for (var i = 0; i < this.ogMatches.length; i++) {
-          //   var curr = this.ogMatches[i];
-          //   console.info(curr.size);
-          //   if (!this.isBoyActive) {
-          //     if (curr.size === "Medium" && curr.sex != "Male") this.matches.push(curr);
-          //   }
-          //   else if (!this.isGirlActive) {
-          //     if (curr.size=== "Medium" && curr.sex != "Female") this.matches.push(curr);
-          //   }
-          //   else if (curr.size === "Medium") this.matches.push(curr);
-
-          // }
         }
+        this.filterItems();
      },
      filterBoys: function() {
         if (this.isBoyActive) {
           this.isBoyActive = false;
-          // stop showing boy
-          this.filterItems();
-          // this.matches = this.matches.filter(function(item) {
-          //   return item.sex != "Male";
-          // })
         }
         else {
           this.isBoyActive = true;
-          // show boy again
-          this.filterItems();
-          // for (var i = 0; i < this.ogMatches.length; i++) {
-          //   var curr = this.ogMatches[i];
-          //   if (!this.isSmallActive) {
-          //     if (curr.sex === "Male" && curr.size != "Small") this.matches.push(curr);
-          //   }
-          //   else if (!this.isBigActive) {
-          //     if (curr.sex === "Male" && curr.size != "Big") this.matches.push(curr);
-          //   }
-          //   else if (curr.sex === "Male") this.matches.push(curr);
           }
+          this.filterItems();
         }
+        
      },
      
   
@@ -236,6 +196,33 @@ export default {
 </script>
 
 <style scoped>
+
+.black_overlay {
+  display: block;
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  z-index: 1001;
+  -moz-opacity: 0.8;
+  opacity: .80;
+  filter: alpha(opacity=80);
+}
+.white_content {
+  display: block;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  width: 50%;
+  height: 50%;
+  padding: 16px;
+  background-color: white;
+  z-index: 1002;
+  overflow: auto;
+}
+
 .header {
   width: 100%;
 }
@@ -266,6 +253,10 @@ export default {
 }
 button:focus {outline:0;}
 
+i {
+  cursor: pointer;
+}
+
 .buttons li {
   display: inline-block;
   float: none;
@@ -278,6 +269,10 @@ button:focus {outline:0;}
   background-color: white;
   border-radius: 25px;
 }*/
+
+.rright {
+  float: right;
+}
 
 .right {
   /*text-align: right;*/
@@ -326,6 +321,11 @@ li {
     display: block;
     
 }
+
+.click {
+  cursor:pointer;
+}
+
 
 #active {
   color: grey;

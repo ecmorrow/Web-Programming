@@ -1,6 +1,6 @@
 
 <template>
-<div id="app">
+<!-- <div id="app"> -->
   <div>
     <div class="header">
       <ul>
@@ -26,8 +26,7 @@
           </div>
           <div class="tcontrols">
             <div @click="nextDog" class="tno" id="dislike"><i class="fa fa-times" aria-hidden="true"></i></div>
-            <div @click="showModal = true" class="ti"><i class="fa fa-info" aria-hidden="true"></i></div>
-            <modal v-show="isModalVisible" @close="closeModal"></modal>
+            <div class="ti"><i class="fa fa-info" aria-hidden="true"></i></div>
             <div @click="addDog" class="tyes" id ="like"><i class="fa fa-heart" aria-hidden="true"></i></div>
           </div>
         </div>
@@ -39,19 +38,14 @@
     </div>
     </div>
 
-  </div>
+  <!-- </div> -->
 </template>
 
 <script>
 import axios from 'axios';
-import modal from './modal.vue';
-
 
 export default {
   name: 'Swipe',
-  components: {
-    modal,
-  },
   data () {
     return {
       isModalVisible: false,

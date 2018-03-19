@@ -33,7 +33,7 @@ app.get('/api/adoptdogs', (req,res) => {
   if (resp.length === 0) {
     axios({
           method:'get',
-          url:'https://api.rescuegroups.org/rest/?key=8oqHMgcE&type=animals&limit=6',
+          url:'https://api.rescuegroups.org/rest/?key=8oqHMgcE&type=animals&limit=100',
           responseType:'document'
         })
         .then(response => {
@@ -99,12 +99,12 @@ app.post('/api/dogs', (req, res) => {
 
 app.delete('/api/matches/:id', (req, res) => {
   let id = parseInt(req.params.id);
-  let removeIndex = items.map(item => { return item.id; }).indexOf(id);
+  let removeIndex = matches.map(item => { return item.id; }).indexOf(id);
   if (removeIndex === -1) {
     res.status(404).send("Sorry, that item doesn't exist");
     return;
   }
-  items.splice(removeIndex, 1);
+  matches.splice(removeIndex, 1);
   res.sendStatus(200);
 });
 
