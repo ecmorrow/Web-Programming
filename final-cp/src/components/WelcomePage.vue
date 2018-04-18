@@ -11,7 +11,9 @@
       <button class="alternate primary" type="submit">Register</button>
     </form>
     <p class="error">{{registerError}}</p>
+    <a href="https://github.com/EmMorrow/cs260/tree/master/final-cp">Github</a>
   </div>
+
 </template>
 
 <script>
