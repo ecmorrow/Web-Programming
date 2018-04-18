@@ -5,13 +5,13 @@ module.exports = {
   development: {
     client: 'mariasql',
     connection: {
-      host     : '127.0.0.1',
-      user     : 'root',
-      password : '',
+      unixSocket : '/var/run/mysqld/mysqld.sock',
+      user     : 'ecmorr',
       db : 'mylists',
       charset  : 'utf8'
     }
   },
+
 
   staging: {
     client: 'postgresql',
