@@ -20,12 +20,7 @@ app.get('/api/matches', (req, res) => {
 });
 
 app.put('/api/addDog', (req,res) => {
-  console.log("adding dog");
   dogs.push(req.body.dog);
-
-  console.log("adding dog");
-  console.log(req.body.dog);
-  console.log(dogs.length);
   res.sendStatus(200);
 })
 
@@ -38,13 +33,6 @@ app.get('/api/adoptdogs', (req,res) => {
         })
         .then(response => {
             resp.push(response.data)
-
-            // console.log("response " + response)
-            // console.log("resp " + resp);    
-
-            // this.dogs = response.data.getElementsByTagName("pet");
-            // let dogs = $('data').find('pet');
-            // console.log(data); 
             res.send(resp);
             return true;
         })
@@ -53,8 +41,6 @@ app.get('/api/adoptdogs', (req,res) => {
 })
 
 app.get('/api/dogs', (req,res) => {
-  console.log("getting dogs")
-  console.log(dogs.length)
   res.send(dogs);
 })
 
@@ -92,8 +78,6 @@ app.get('/api/getCurrDog', (req,res) => {
 
 app.post('/api/dogs', (req, res) => {
   let dogs = req.body.dogs;
-  console.log("settings dogs");
-  console.log(req.body);
   res.send(dogs);
 });
 
